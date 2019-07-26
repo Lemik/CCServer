@@ -14,7 +14,7 @@ exports.get_all = (req,res,next)=>{
                     _id: doc.id,
                     name: doc.name,
                     count: doc.numberOfItems,
-                    url: 'http://localhost:3000/collections/' + doc.id
+                    url: process.env.HOSTING + '/collections/' + doc.id
                 }
             })
         }

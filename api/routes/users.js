@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const controllers = require('../controllers/user');
+const controller = require('../controllers/user');
 
-router.post('/siginup', controllers.post_signIn);
-router.post('/login', controllers.post_login);
-router.delete('/:userId', controllers.delete);
+router.post('/siginup', controller.post_signIn);
+router.post('/login', controller.post_login);
+
+router.get('/', controller.get_all);
+router.delete('/:userId', controller.delete);
 
 module.exports = router;

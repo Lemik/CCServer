@@ -1,6 +1,7 @@
 {
     "env":{
         "MONGO_ATLAS_PW": "m0raJ1YubLkN1q6r",
-        "JWT_KEY": "secreet"
+        "JWT_KEY": "secreet",
+        "HOSTING": "http://localhost:3000"
     }
 }

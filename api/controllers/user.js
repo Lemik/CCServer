@@ -9,7 +9,7 @@ exports.post_signIn =(req, res, next)=>{
         .then(user => {
             if(user.length>=1){
                 return res.status(409).json({
-                    message: 'email already exist'
+                    message: 'Email already exist'
                 });
             }else{
                 bcrypt.hash(req.body.password,10,(err,hash)=>{
@@ -82,8 +82,32 @@ exports.post_login = (req,res,next) =>{
         console.log(err);
         res.status(500).json({error: err
         });
-    
 });
+};
+
+exports.get_all = (req, res, next) =>{
+    User.find()
+    .select('email')
+    .exec()
+    .then(docs =>{
+        const response ={
+            count: docs.length,
+            users: docs.map(doc =>{
+                return {
+                    _id: doc.id,
+                    email: doc.email,
+                    deleteUrl:  process.env.HOSTING +'/user/'+ doc.id
+                }
+            })
+        }
+        res.status(200).json(response);
+    })
+    .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
+    });
 };
 
 exports.delete = (req, res, next)=>{

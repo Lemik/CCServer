@@ -5,8 +5,24 @@ exports.coins_get_all = (req,res,next)=>{
     Coin.find()
     .exec()
     .then(docs => {
-        console.log(docs);
-            res.status(200).json(docs);
+        //console.log(docs);
+        const response ={
+            count: docs.length,
+            coins: docs.map(doc =>{
+                return {
+                    _id: doc.id,
+                    title: doc.title,
+                    year: doc.year,
+                    nominal: doc.nominal,
+                    mint: doc.mint,
+                    description: doc.description,
+                    imageA: doc.imageA,
+                    imageB: doc.imageB,
+                    url: process.env.HOSTING +'/coins/'+ doc.id
+                }
+            })
+        }
+            res.status(200).json(response);
     })
     .catch(err=>{
         console.log(err);
@@ -51,7 +67,7 @@ exports.coins_post1 =(req,res,next)=>{
     .then(result => { 
         console.log(result);
         res.status(201).json({
-                 message:'handel POST',
+                 message:'Handel POST',
                  createdCoin: Coin
         });
     }).catch(err=>{
@@ -105,3 +121,4 @@ exports.coint_delete = (req, res, next)=>{
         res.status(500).json({error: err});
     });
 };
+

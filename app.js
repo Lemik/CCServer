@@ -8,7 +8,6 @@ const collectionsRoutes = require('./api/routes/collections');
 const coinsRoutes = require('./api/routes/coins');
 const userRoutes = require('./api/routes/users')
 
-
 mongoose.connect('mongodb://cc:' + process.env.MONGO_ATLAS_PW + '@freecluster-shard-00-00-7mhl6.mongodb.net:27017,freecluster-shard-00-01-7mhl6.mongodb.net:27017,freecluster-shard-00-02-7mhl6.mongodb.net:27017/test?ssl=true&replicaSet=FreeCluster-shard-0&authSource=admin&retryWrites=true',{ useNewUrlParser: true });
 
 mongoose.Promise = global.Promise;
@@ -30,10 +29,9 @@ app.use((req,res,next)=>{
 });
 
 //Routes which should handle requests
-app.use('/collections',collectionsRoutes);
-app.use('/coins',coinsRoutes);
-app.use('/users',userRoutes);
-
+app.use('/collections', collectionsRoutes);
+app.use('/coins', coinsRoutes);
+app.use('/users', userRoutes);
 
 //Errors handler
 app.use((req,res,next) => {
